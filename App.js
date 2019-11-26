@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, TextInput, TouchableOpacity, Image } from 'react-native';
+import { Text, View, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 // You can import from local files
 // or any pure javascript modules available in npm
 
@@ -27,21 +27,40 @@ export default class Dictionary extends React.Component {
         { English: "I have a bread", VietNamese: "Tôi có một cái bánh mì " },
         { English: "I have a book", VietNamese: "Tôi có một quyển sách" },
         { English: "I have a card", VietNamese: "Tôi có một cái thẻ" },
-        { English: "I have a shirt", VietNamese: "Toi co mot cai ao" },
+        { English: "I have a shirt", VietNamese: "Tôi có một cái áo" },
         { English: "Apple", VietNamese: "trái táo" },
+        { English: "Orange", VietNamese: "trái cam" },
+        { English: "pen", VietNamese: "bút" },
+        { English: "bag", VietNamese: "cặp sách" },
+        { English: "shoes", VietNamese: "đôi giày" },
+        { English: "book", VietNamese: "quyển sách" }
       ]
     };
 
   }
   TranslateToVietNamese() {
+    let check = false;
+    let index ;
     for (let i = 0; i < this.state.dictionary.length; i++) {
-      if (this.state.INPUT == this.state.dictionary[i].English) this.setState({ OUTPUT: this.state.dictionary[i].VietNamese })
+      if (this.state.INPUT === this.state.dictionary[i].English){
+        check = true;
+        index = i;
+      } 
     }
+    if (check == true) this.setState({ OUTPUT: this.state.dictionary[index].VietNamese })
+    else this.setState({ OUTPUT: this.state.INPUT })
   }
   TranslateToEnglish() {
+    let check = false;
+    let index ;
     for (let i = 0; i < this.state.dictionary.length; i++) {
-      if (this.state.INPUT == this.state.dictionary[i].VietNamese) this.setState({ OUTPUT: this.state.dictionary[i].English })
+      if (this.state.INPUT === this.state.dictionary[i].VietNamese){
+        check = true;
+        index = i;
+      } 
     }
+    if (check == true) this.setState({ OUTPUT: this.state.dictionary[index].English })
+    else this.setState({ OUTPUT: this.state.INPUT })
   }
   render() {
     return (
@@ -102,11 +121,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   In: {
-    height: 100,
+    height: 50,
+    width: 300,
     borderWidth: 1,
     borderColor: '#385999',
-    width: 300,
-    borderRadius: 15,
+    borderRadius: 10,
     margin: 15,
     padding: 7,
     fontSize: 21,
@@ -116,7 +135,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#385999',
     width: 300,
-    borderRadius: 15,
+    borderRadius: 10,
     margin: 15,
     marginBottom: 30,
     padding: 7,
